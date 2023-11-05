@@ -1,16 +1,17 @@
 #!/bin/bash
 
+file_dir="./linux"
+
 # Download log file
-file_name="access.log"
+file_name="$file_dir/access.log"
 file_id="1Wuko3rkpL9TtOXTSIVmZ3tFHYFQs2sxf"
 
 curl -L -o $file_name "https://drive.google.com/uc?export=download&id={$file_id}"
 echo -e "Downloaded log file: $file_name\n"
 
 # Read blacklisted IPs from file
-blacklist_file="./blacklist.txt"
+blacklist_file="$file_dir/blacklist.txt"
 readarray -t blacklisted < $blacklist_file
-echo -e "Blacklisted IPs loaded from file: $blacklist_file\n"
 
 # Load SQL injection patterns
 sql_injection_patterns=(
@@ -21,13 +22,12 @@ sql_injection_patterns=(
 )
 
 # Setup output file
-output_file="audit_rpt.txt"
-if [ -f "audit_rpt.txt" ]; then
+output_file="$file_dir/audit_rpt.txt"
+if [ -f $output_file ]; then
     > "$output_file"
 else
-    touch "audit_rpt.txt"
+    touch $output_file
 fi
-echo -e "Output file prepared: $output_file\n"
 
 # Read log file line by line and audit
 line_number=1
