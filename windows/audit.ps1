@@ -1,6 +1,8 @@
 
+$file_dir="./windows"
+
 # Download log file from Google Drive
-$filename = "access.log"
+$filename = "$file_dir/access.log"
 $fileid = "1Wuko3rkpL9TtOXTSIVmZ3tFHYFQs2sxf"
 
 Write-Host
@@ -14,7 +16,7 @@ Write-Host "Downloaded $filename from Google Drive"
 Write-Host
 
 # Load list of blacklisted IPs
-$blacklist = Get-Content "./blacklist.txt"
+$blacklist = Get-Content "$file_dir/blacklist.txt"
 
 # Load SQL injection patterns
 $sqlInjection = @(
@@ -27,10 +29,8 @@ $sqlInjection = @(
 # Read log file line by line
 $lines = Get-Content ${FILENAME}
 
-Write-Host "Processing $filename..."
-
 # Setup output file
-$auditReport = "./audit_rpt.txt"
+$auditReport = "$file_dir/audit_rpt.txt"
 if (Test-Path $auditReport) {
     Clear-Content $auditReport
 } else {
@@ -43,9 +43,11 @@ $lines = Get-Content ${FILENAME}
 Write-Host "Processing $filename..."
 
 # Loop through the lines using a while loop
-$line_number = 0
+$line_number = 1
 while ($line_number -lt $lines.Length) {
     $line = $lines[$line_number]
+
+    $line_number++
 
     # Check if the line contains a blacklisted IP
     foreach ($ip in $blacklist) {
@@ -60,8 +62,6 @@ while ($line_number -lt $lines.Length) {
             Add-Content -Path $auditReport -Value "$line_number, Found SQL injection pattern: $pattern"
         }
     }
-
-    $line_number++
 }
 
 Write-Host "Processing complete"
