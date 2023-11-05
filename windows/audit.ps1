@@ -29,6 +29,19 @@ $lines = Get-Content ${FILENAME}
 
 Write-Host "Processing $filename..."
 
+# Setup output file
+$auditReport = "./audit_rpt.txt"
+if (Test-Path $auditReport) {
+    Clear-Content $auditReport
+} else {
+    New-Item -Path $auditReport -ItemType File
+}
+
+# Read log file line by line
+$lines = Get-Content ${FILENAME}
+
+Write-Host "Processing $filename..."
+
 # Loop through the lines using a while loop
 $line_number = 0
 while ($line_number -lt $lines.Length) {
@@ -37,14 +50,14 @@ while ($line_number -lt $lines.Length) {
     # Check if the line contains a blacklisted IP
     foreach ($ip in $blacklist) {
         if ($line.Contains($ip)) {
-            Write-Host "Found blacklisted IP: $ip"
+            Add-Content -Path $auditReport -Value "$line_number, Found blacklisted IP: $ip"
         }
     }
 
     # Check if the line contains a SQL injection string
     foreach ($pattern in $sqlInjection) {
         if ($line.Contains($pattern)) {
-            Write-Host "Found SQL injection: $pattern"
+            Add-Content -Path $auditReport -Value "$line_number, Found SQL injection pattern: $pattern"
         }
     }
 
@@ -52,3 +65,5 @@ while ($line_number -lt $lines.Length) {
 }
 
 Write-Host "Processing complete"
+Write-Host "Audit report written to $auditReport"
+Write-Host
