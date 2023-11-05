@@ -5,7 +5,7 @@
 Scripting bash code for downloading and processing given log file, script inputs, and outputs can be found in [linux](/linux/) directory.
 
 ### To Run:
-- Give [`linux/audit.sh`](/linux/audit.sh) script permisions to be executable
+- Give [/linux/audit.sh](/linux/audit.sh) script permisions to be executable
 - run script
 
 ## Windows Powershell Scripting
@@ -13,7 +13,7 @@ Scripting bash code for downloading and processing given log file, script inputs
 Scripting powershell code for downloading and processing given log file, script inputs, and outputs can be found in [windows](/windows/) directory.
 
 ### To Run:
-- Give [`windows/audit.sh`](/windows/audit.sh) script permisions to be executable
+- Give [/windows/audit.sh](/windows/audit.sh) script permisions to be executable
 - run script
 
 ## Project Details
