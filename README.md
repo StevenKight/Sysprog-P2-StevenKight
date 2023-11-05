@@ -13,7 +13,7 @@ Scripting bash code for downloading and processing given log file, script inputs
 Scripting powershell code for downloading and processing given log file, script inputs, and outputs can be found in [windows](/windows/) directory.
 
 ### To Run:
-- Give [/windows/audit.sh](/windows/audit.ps1) script permisions to be executable
+- Give [/windows/audit.ps1](/windows/audit.ps1) script permisions to be executable
 - run script
 
 ## Project Details
