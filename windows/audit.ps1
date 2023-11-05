@@ -12,3 +12,20 @@ $WebClient.DownloadFile($Url, ".\$filename")
 
 Write-Host "Downloaded $filename from Google Drive"
 Write-Host
+
+# Read log file line by line
+$lines = Get-Content ${FILENAME}
+
+Write-Host "Processing $filename..."
+
+# Loop through the lines using a while loop
+$line_number = 0
+while ($line_number -lt $lines.Length) {
+    $line = $lines[$line_number]
+
+    Write-Host "Line $line_number: $line"
+
+    $line_number++
+}
+
+Write-Host "Processing complete"
