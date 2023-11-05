@@ -22,7 +22,7 @@ sql_injection_patterns=(
 
 # Setup output file
 output_file="audit_rpt.txt"
-if [ -f "audit_rpt.txt" ]; then # TODO: Should file be cleared?
+if [ -f "audit_rpt.txt" ]; then
     > "$output_file"
 else
     touch "audit_rpt.txt"
